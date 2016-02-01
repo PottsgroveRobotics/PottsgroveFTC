@@ -86,21 +86,30 @@ public class PottsgroveTeleOp extends OpMode {
      */
     @Override
     public void loop() {
+
+        //DRIVE
+
         double motorRightPower = mapJoysticktoDriveMotor(Range.clip(-gamepad1.left_stick_y - gamepad1.left_stick_x, -1, 1));
         double motorLeftPower =  mapJoysticktoDriveMotor(Range.clip(-gamepad1.left_stick_y + gamepad1.left_stick_x, -1, 1));
 
         motorLeftPower = (1/(motorLeftPower+gamepad2.left_stick_x*robotYawSpeed))*(gamepad2.left_stick_x * robotYawSpeed - (motorLeftPower+gamepad2.left_stick_x*robotYawSpeed))+1;
         motorRightPower = (1/(motorRightPower-gamepad2.left_stick_x*robotYawSpeed))*(-gamepad2.left_stick_x * robotYawSpeed - (motorRightPower-gamepad2.left_stick_x*robotYawSpeed))+1;
 
+        motorDriveRight.setPower(motorRightPower);
+        motorDriveLeft.setPower(motorLeftPower);
 
+        //ARM
 
-        
+        double motorShoulderPower = -gamepad2.left_stick_y;
+        double motorElbowPower = -gamepad2.right_stick_y;
 
+        motorArmShoulder.setPower(motorShoulderPower);
+        motorArmElbow.setPower(motorElbowPower);
 
+        //TAPE
 
         motorTapeExtrusion.setPower(-gamepad1.right_stick_y * tapeExtrusionSpeed);
         motorTapeAngle.setPower(gamepad1.right_stick_x *tapeAngleSpeed);
-
 
         motorDriveRight.setPower(motorRightPower);
         motorDriveLeft.setPower(motorLeftPower);
