@@ -28,6 +28,7 @@ public class PottsgroveTeleOp extends OpMode {
     static double tapeExtrusionSpeed = 1.0;
     static double tapeAngleSpeed = 0.5;
     static double robotYawSpeed = 0.2;
+    static double driveSpeed = 1.0;
 
 
     // amount to change the arm servos' position.
@@ -89,8 +90,8 @@ public class PottsgroveTeleOp extends OpMode {
 
         //DRIVE
 
-        double motorRightPower = mapJoysticktoDriveMotor(Range.clip(-gamepad1.left_stick_y - gamepad1.left_stick_x, -1, 1));
-        double motorLeftPower =  mapJoysticktoDriveMotor(Range.clip(-gamepad1.left_stick_y + gamepad1.left_stick_x, -1, 1));
+        double motorRightPower = mapJoysticktoDriveMotor(Range.clip(driveSpeed*(-gamepad1.left_stick_y - gamepad1.left_stick_x), -1, 1));
+        double motorLeftPower =  mapJoysticktoDriveMotor(Range.clip(driveSpeed*(-gamepad1.left_stick_y + gamepad1.left_stick_x), -1, 1));
 
         motorLeftPower = (1/(motorLeftPower+gamepad2.left_stick_x*robotYawSpeed))*(gamepad2.left_stick_x * robotYawSpeed - (motorLeftPower+gamepad2.left_stick_x*robotYawSpeed))+1;
         motorRightPower = (1/(motorRightPower-gamepad2.left_stick_x*robotYawSpeed))*(-gamepad2.left_stick_x * robotYawSpeed - (motorRightPower-gamepad2.left_stick_x*robotYawSpeed))+1;
