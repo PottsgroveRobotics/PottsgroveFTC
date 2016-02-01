@@ -215,4 +215,7 @@ public class PottsgroveTeleOp extends OpMode {
         return dScale;
     }
 
+    float restrictServo(float position){
+        //return new output;
+    }
 }
