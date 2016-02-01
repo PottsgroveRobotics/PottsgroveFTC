@@ -27,6 +27,7 @@ public class PottsgroveTeleOp extends OpMode {
     static double elbowSpeed = 1.0;
     static double tapeExtrusionSpeed = 1.0;
     static double tapeAngleSpeed = 0.5;
+    static double robotYawSpeed = 0.2;
 
 
     // amount to change the arm servos' position.
@@ -85,14 +86,19 @@ public class PottsgroveTeleOp extends OpMode {
      */
     @Override
     public void loop() {
+        double motorRightPower = mapJoysticktoDriveMotor(Range.clip(-gamepad1.left_stick_y - gamepad1.left_stick_x, -1, 1));
+        double motorLeftPower =  mapJoysticktoDriveMotor(Range.clip(-gamepad1.left_stick_y + gamepad1.left_stick_x, -1, 1));
 
-        motorDriveRight.setPower(mapJoysticktoDriveMotor(Range.clip(-gamepad1.left_stick_y - gamepad1.left_stick_x, -1, 1)));
-        motorDriveLeft.setPower(mapJoysticktoDriveMotor(Range.clip(-gamepad1.left_stick_y + gamepad1.left_stick_x, -1, 1)));
+        motorLeftPower = (1/(motorLeftPower+gamepad2.left_stick_x*robotYawSpeed))*(gamepad2.left_stick_x * robotYawSpeed - (motorLeftPower+gamepad2.left_stick_x*robotYawSpeed))+1;
+        motorRightPower = (1/(motorLeftPower-gamepad2.left_stick_x*robotYawSpeed))*(-gamepad2.left_stick_x * robotYawSpeed - (motorLeftPower-gamepad2.left_stick_x*robotYawSpeed))+1;
+
 
         motorTapeExtrusion.setPower(-gamepad1.right_stick_y * tapeExtrusionSpeed);
         motorTapeAngle.setPower(gamepad1.right_stick_x *tapeAngleSpeed);
 
-      
+
+        motorDriveRight.setPower(motorRightPower);
+        motorDriveLeft.setPower(motorLeftPower);
         //insert Arm functionality here
 
         // update the position of the claw
@@ -127,8 +133,8 @@ public class PottsgroveTeleOp extends OpMode {
         telemetry.addData("right arm", "right arm:  " + String.format("%.2f", handRightPosition));
         telemetry.addData("left arm", "left arm:  " + String.format("%.2f", handLeftPosition));
         //telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
-        telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", driveLeft));
-        telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", driveRight));
+        telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", motorLeftPower));
+        telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", motorRightPower));
         telemetry.addData("elbow tgt pwr", "elbow pwr: " + String.format("%.2f", armElbow));
         telemetry.addData("shoulder tgt pwr", "shoulder pwr: " + String.format("%.2f", armShoulder));
     }
