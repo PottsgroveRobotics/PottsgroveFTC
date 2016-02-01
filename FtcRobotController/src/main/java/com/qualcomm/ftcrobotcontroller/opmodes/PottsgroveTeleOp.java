@@ -30,6 +30,8 @@ public class PottsgroveTeleOp extends OpMode {
     static double robotYawSpeed = 0.2;
     static double driveSpeed = 1.0;
     static double speedDelta = 0.02;
+    static double handDelta = 0.0;
+    static double handDeltaSpeed = 0.01;
 
 
     // amount to change the arm servos' position.
@@ -41,8 +43,8 @@ public class PottsgroveTeleOp extends OpMode {
     DcMotor motorDriveLeft;
     DcMotor motorArmShoulder;
     DcMotor motorArmElbow;
-    Servo motorClawLeft;
-    Servo motorClawRight;
+    Servo servoHandLeft;
+    Servo servoHandRight;
     DcMotor motorTapeAngle;
     DcMotor motorTapeExtrusion;
 
@@ -76,8 +78,8 @@ public class PottsgroveTeleOp extends OpMode {
         //motorArmElbow.setDirection(DcMotor.Direction.REVERSE);
 
 
-        motorClawLeft = hardwareMap.servo.get("servo_3");
-        motorClawRight = hardwareMap.servo.get("servo_4");
+        servoHandLeft = hardwareMap.servo.get("servo_3");
+        servoHandRight = hardwareMap.servo.get("servo_4");
 
     }
 
@@ -104,6 +106,12 @@ public class PottsgroveTeleOp extends OpMode {
 
         double motorShoulderPower = -gamepad2.left_stick_y * shoulderSpeed;
         double motorElbowPower = -gamepad2.right_stick_y * elbowSpeed;
+
+        handDelta = gamepad2.right_stick_x*handDeltaSpeed;
+
+        handLeftPosition -= handDelta;
+        handRightPosition += handDelta;
+
 
         motorArmShoulder.setPower(motorShoulderPower);
         motorArmElbow.setPower(motorElbowPower);
@@ -155,29 +163,16 @@ public class PottsgroveTeleOp extends OpMode {
             robotYawSpeed += speedDelta;
         }
 
-        //insert Arm functionality here
-
-        // update the position of the claw
-        /**if (gamepad1.x) {
-         *   clawPosition += clawDelta;
-         *}
-         *
-         *if (gamepad1.b) {
-         *    clawPosition -= clawDelta;
-         *}
-         */
 
         // clip the position values so that they never exceed their allowed range.
         handLeftPosition = Range.clip(handLeftPosition, HANDLEFT_MIN_RANGE, HANDLEFT_MAX_RANGE);
         handRightPosition = Range.clip(handRightPosition, HANDRIGHT_MIN_RANGE, HANDRIGHT_MAX_RANGE);
+
         robotYawSpeed = Range.clip(robotYawSpeed, 0,1);
 
-        //clawPosition = Range.clip(clawPosition, CLAW_MIN_RANGE, CLAW_MAX_RANGE);
+        servoHandLeft.setPosition(handLeftPosition);
+        servoHandRight.setPosition(handRightPosition);
 
-        // write position values to the wrist and claw servo
-        /*arm.setPosition(armPosition);
-
-        claw.setPosition(clawPosition);
 
 
 
@@ -188,13 +183,10 @@ public class PottsgroveTeleOp extends OpMode {
 		 * are currently write only.
 		 */
         telemetry.addData("Text", "*** Robot Data***");
-        telemetry.addData("right arm", "right arm:  " + String.format("%.2f", handRightPosition));
-        telemetry.addData("left arm", "left arm:  " + String.format("%.2f", handLeftPosition));
-        //telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
+
         telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", motorLeftPower));
         telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", motorRightPower));
-        telemetry.addData("elbow tgt pwr", "elbow pwr: " + String.format("%.2f", armElbow));
-        telemetry.addData("shoulder tgt pwr", "shoulder pwr: " + String.format("%.2f", armShoulder));
+
     }
 
     /*
@@ -219,7 +211,5 @@ public class PottsgroveTeleOp extends OpMode {
         return joystickValue * Math.abs(joystickValue);
     }
 
-    double restrictServo(double position) {
-        //return new output
-    }
+
 }
