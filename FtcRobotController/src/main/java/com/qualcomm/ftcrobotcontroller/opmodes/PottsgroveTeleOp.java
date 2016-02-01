@@ -89,7 +89,7 @@ public class PottsgroveTeleOp extends OpMode {
         motorDriveRight.setPower(mapJoysticktoDriveMotor(Range.clip(-gamepad1.left_stick_y - gamepad1.left_stick_x, -1, 1)));
         motorDriveLeft.setPower(mapJoysticktoDriveMotor(Range.clip(-gamepad1.left_stick_y + gamepad1.left_stick_x, -1, 1)));
 
-<<<<<<< HEAD
+
         
         // write the values to the motors
         //motorDriveRight.setPower(driveRight);
@@ -97,12 +97,12 @@ public class PottsgroveTeleOp extends OpMode {
         // motorDriveLeft.setPower(driveLeft);
         motorDriveLeft.setPower(1.0);
 
-=======
+
         motorTapeExtrusion.setPower(-gamepad1.right_stick_y * tapeExtrusionSpeed);
         motorTapeAngle.setPower(gamepad1.right_stick_x *tapeAngleSpeed);
 
       
->>>>>>> origin/master
+
         //insert Arm functionality here
 
         // update the position of the claw
