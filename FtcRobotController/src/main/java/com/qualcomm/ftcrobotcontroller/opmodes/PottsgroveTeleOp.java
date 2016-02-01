@@ -100,8 +100,8 @@ public class PottsgroveTeleOp extends OpMode {
 
         //ARM
 
-        double motorShoulderPower = -gamepad2.left_stick_y;
-        double motorElbowPower = -gamepad2.right_stick_y;
+        double motorShoulderPower = -gamepad2.left_stick_y * shoulderSpeed;
+        double motorElbowPower = -gamepad2.right_stick_y * elbowSpeed;
 
         motorArmShoulder.setPower(motorShoulderPower);
         motorArmElbow.setPower(motorElbowPower);
