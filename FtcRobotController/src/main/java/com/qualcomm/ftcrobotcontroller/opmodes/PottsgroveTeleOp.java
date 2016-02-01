@@ -29,6 +29,7 @@ public class PottsgroveTeleOp extends OpMode {
     static double tapeAngleSpeed = 0.5;
     static double robotYawSpeed = 0.2;
     static double driveSpeed = 1.0;
+    static double speedDelta = 0.02;
 
 
     // amount to change the arm servos' position.
@@ -117,12 +118,34 @@ public class PottsgroveTeleOp extends OpMode {
 
         //ARROWS
 
+        //Drive
+
         if(gamepad1.dpad_up){
-            driveSpeed += 0.02;
+            driveSpeed += speedDelta;
             Range.clip(driveSpeed, -1, 1);
         } else if(gamepad1.dpad_down){
-            driveSpeed -= 0.02;
+            driveSpeed -= speedDelta;
             Range.clip(driveSpeed, -1, 1);
+        }
+
+        //Shoulder
+
+        if(gamepad2.dpad_up){
+            shoulderSpeed += speedDelta;
+            Range.clip(shoulderSpeed, -1, 1);
+        }else if(gamepad2.dpad_down){
+            shoulderSpeed -= speedDelta;
+            Range.clip(shoulderSpeed, -1, 1);
+        }
+
+        //Elbow
+
+        if(gamepad2.dpad_right){
+            elbowSpeed += speedDelta;
+            Range.clip(elbowSpeed, -1, 1);
+        } else if(gamepad2.dpad_left){
+            elbowSpeed -= speedDelta;
+            Range.clip(elbowSpeed, -1, 1);
         }
 
         //insert Arm functionality here
