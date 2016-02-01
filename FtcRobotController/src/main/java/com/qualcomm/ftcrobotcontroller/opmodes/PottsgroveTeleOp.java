@@ -23,11 +23,15 @@ public class PottsgroveTeleOp extends OpMode {
     final static double HANDLEFT_MIN_RANGE  = 0.20;
     final static double HANDLEFT_MAX_RANGE  = 0.7;
 
+    static double shoulderSpeed = 1.0;
+    static double elbowSpeed = 1.0;
+    static double tapeExtrusionSpeed = 1.0;
+    static double tapeDirectionSpeed = 0.5;
 
 
     // amount to change the arm servos' position.
-    double handLeftDelta = 0.1;
-    double handRightDelta = 0.1;
+    double handLeftPosition = 0.1;
+    double handRightPosition = 0.1;
 
     //declare motors and servos
     DcMotor motorDriveRight;
