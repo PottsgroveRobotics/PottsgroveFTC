@@ -36,8 +36,8 @@ public class PottsgroveTeleOp extends OpMode {
     //declare motors and servos
     DcMotor motorDriveRight;
     DcMotor motorDriveLeft;
-    Servo motorArmShoulder;
-    Servo motorArmElbow;
+    DcMotor motorArmShoulder;
+    DcMotor motorArmElbow;
     Servo motorClawLeft;
     Servo motorClawRight;
     DcMotor motorTapeAngle;
