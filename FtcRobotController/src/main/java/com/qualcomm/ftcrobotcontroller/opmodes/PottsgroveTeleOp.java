@@ -148,6 +148,13 @@ public class PottsgroveTeleOp extends OpMode {
             Range.clip(elbowSpeed, -1, 1);
         }
 
+        // yaw speed
+        if(gamepad2.left_bumper){
+            robotYawSpeed -= speedDelta;
+        }else if(gamepad2.right_bumper){
+            robotYawSpeed += speedDelta;
+        }
+
         //insert Arm functionality here
 
         // update the position of the claw
@@ -163,6 +170,8 @@ public class PottsgroveTeleOp extends OpMode {
         // clip the position values so that they never exceed their allowed range.
         handLeftPosition = Range.clip(handLeftPosition, HANDLEFT_MIN_RANGE, HANDLEFT_MAX_RANGE);
         handRightPosition = Range.clip(handRightPosition, HANDRIGHT_MIN_RANGE, HANDRIGHT_MAX_RANGE);
+        robotYawSpeed = Range.clip(robotYawSpeed, 0,1);
+
         //clawPosition = Range.clip(clawPosition, CLAW_MIN_RANGE, CLAW_MAX_RANGE);
 
         // write position values to the wrist and claw servo
