@@ -78,8 +78,8 @@ public class PottsgroveTeleOp extends OpMode {
         //motorArmElbow.setDirection(DcMotor.Direction.REVERSE);
 
 
-        servoHandLeft = hardwareMap.servo.get("servo_3");
-        servoHandRight = hardwareMap.servo.get("servo_4");
+        servoHandLeft = hardwareMap.servo.get("servo_1");
+        servoHandRight = hardwareMap.servo.get("servo_2");
 
     }
 
