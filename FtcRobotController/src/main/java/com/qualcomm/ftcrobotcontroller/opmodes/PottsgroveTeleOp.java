@@ -86,28 +86,10 @@ public class PottsgroveTeleOp extends OpMode {
     @Override
     public void loop() {
 
-		/*
-		 * Gamepad 1
-		 *
-		 * Gamepad 1 controls the motors via the left stick, and it controls the
-		 * wrist/claw via the a,b, x, y buttons
-		 */
+        motorDriveRight.setPower(mapJoysticktoDriveMotor(Range.clip(-gamepad1.left_stick_y - gamepad1.left_stick_x, -1, 1)));
+        motorDriveLeft.setPower(mapJoysticktoDriveMotor(Range.clip(-gamepad1.left_stick_y + gamepad1.left_stick_x, -1, 1)));
 
-        // throttle: left_stick_y ranges from -1 to 1, where -1 is full up, and
-        // 1 is full down
-        // direction: left_stick_x ranges from -1 to 1, where -1 is full left
-        // and 1 is full right
-        float driveThrottle = gamepad1.left_stick_y;
-        float driveDirection = gamepad1.left_stick_x;
-        float driveRight = driveThrottle - driveDirection;
-        float driveLeft = driveThrottle + driveDirection;
-        float armShoulderIncrement = gamepad2.left_stick_y/2;
-        float armElbowIncrement = gamepad1.right_stick_y/2;
-
-        // clip the right/left values so that the values never exceed +/- 1
-        driveRight = Range.clip(driveRight, -1, 1);
-        driveLeft = Range.clip(driveLeft, -1, 1);
-
+<<<<<<< HEAD
         
         // write the values to the motors
         //motorDriveRight.setPower(driveRight);
@@ -115,6 +97,12 @@ public class PottsgroveTeleOp extends OpMode {
         // motorDriveLeft.setPower(driveLeft);
         motorDriveLeft.setPower(1.0);
 
+=======
+        motorTapeExtrusion.setPower(-gamepad1.right_stick_y * tapeExtrusionSpeed);
+        motorTapeAngle.setPower(gamepad1.right_stick_x *tapeAngleSpeed);
+
+      
+>>>>>>> origin/master
         //insert Arm functionality here
 
         // update the position of the claw
@@ -171,36 +159,13 @@ public class PottsgroveTeleOp extends OpMode {
      * scaled value is less than linear.  This is to make it easier to drive
      * the robot more precisely at slower speeds.
      */
-    double scaleInput(double dVal)  {
-        double[] scaleArray = { 0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
-                0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00 };
 
-        // get the corresponding index for the scaleInput array.
-        int index = (int) (dVal * 16.0);
 
-        // index should be positive.
-        if (index < 0) {
-            index = -index;
-        }
-
-        // index cannot exceed size of array minus 1.
-        if (index > 16) {
-            index = 16;
-        }
-
-        // get value from the array.
-        double dScale = 0.0;
-        if (dVal < 0) {
-            dScale = -scaleArray[index];
-        } else {
-            dScale = scaleArray[index];
-        }
-
-        // return scaled value.
-        return dScale;
+    double mapJoysticktoDriveMotor(double joystickValue) {
+        return joystickValue * Math.abs(joystickValue);
     }
 
-    float restrictServo(float position){
-        //return new output;
+    double restrictServo(double position) {
+        //return new output
     }
 }
