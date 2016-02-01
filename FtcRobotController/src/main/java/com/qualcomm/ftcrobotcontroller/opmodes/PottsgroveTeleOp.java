@@ -70,7 +70,7 @@ public class PottsgroveTeleOp extends OpMode {
         motorTapeDistance = hardwareMap.dcMotor.get("motor_6");
         //motorTapeDistance.setDirection(DcMotor.Direction.REVERSE);
 
-        motorArmShoulder = hardwareMap.servo.get("servo_1");
+        motorArmShoulder = hardwareMap.dcMotor.get("servo_1");
         motorArmElbow = hardwareMap.servo.get("servo_2");
         motorClawLeft = hardwareMap.servo.get("servo_3");
         motorClawRight = hardwareMap.servo.get("servo_4");
@@ -114,27 +114,7 @@ public class PottsgroveTeleOp extends OpMode {
         // motorDriveLeft.setPower(driveLeft);
         motorDriveLeft.setPower(1.0);
 
-        shoulderPos += armShoulderIncrement;
-        elbowPos += armElbowIncrement;
-
-        if(gamepad2.a){
-            motorArmShoulder.setPosition(shoulderPos);
-            motorArmElbow.setPosition(elbowPos);
-        }
-        // update the position of the arm.
-        if (gamepad1.a) {
-            // if the A button is pushed on gamepad1, increment the position of
-            // the arm servo.
-            handLeftPosition += handLeftDelta;
-            handRightPosition += handRightDelta;
-        }
-
-        if (gamepad1.y) {
-            // if the Y button is pushed on gamepad1, decrease the position of
-            // the arm servo.
-            handLeftPosition -= handLeftDelta;
-            handRightPosition -= handRightDelta;
-        }
+        //insert Arm functionality here
 
         // update the position of the claw
         /**if (gamepad1.x) {
