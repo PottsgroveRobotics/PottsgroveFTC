@@ -114,6 +114,15 @@ public class PottsgroveTeleOp extends OpMode {
         motorDriveRight.setPower(motorRightPower);
         motorDriveLeft.setPower(motorLeftPower);
 
+        //ARROWS
+
+        if(gamepad1.dpad_up){
+            driveSpeed += 0.02;
+            Range.clip(driveSpeed, -1, 1);
+        } else if(gamepad1.dpad_down){
+            driveSpeed -= 0.02;
+            Range.clip(driveSpeed, -1, 1);
+        }
 
         //insert Arm functionality here
 
