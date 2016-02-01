@@ -73,7 +73,7 @@ public class PottsgroveTeleOp extends OpMode {
         motorArmElbow = hardwareMap.dcMotor.get("servo_4");
         //motorArmElbow.setDirection(DcMotor.Direction.REVERSE);
 
-        
+
         motorClawLeft = hardwareMap.servo.get("servo_3");
         motorClawRight = hardwareMap.servo.get("servo_4");
 
@@ -93,12 +93,26 @@ public class PottsgroveTeleOp extends OpMode {
         motorRightPower = (1/(motorLeftPower-gamepad2.left_stick_x*robotYawSpeed))*(-gamepad2.left_stick_x * robotYawSpeed - (motorLeftPower-gamepad2.left_stick_x*robotYawSpeed))+1;
 
 
+
+        
+        // write the values to the motors
+        //motorDriveRight.setPower(driveRight);
+        motorDriveRight.setPower(1.0);
+        // motorDriveLeft.setPower(driveLeft);
+        motorDriveLeft.setPower(1.0);
+
+
         motorTapeExtrusion.setPower(-gamepad1.right_stick_y * tapeExtrusionSpeed);
         motorTapeAngle.setPower(gamepad1.right_stick_x *tapeAngleSpeed);
 
+<<<<<<< HEAD
 
         motorDriveRight.setPower(motorRightPower);
         motorDriveLeft.setPower(motorLeftPower);
+=======
+      
+
+>>>>>>> origin/master
         //insert Arm functionality here
 
         // update the position of the claw
