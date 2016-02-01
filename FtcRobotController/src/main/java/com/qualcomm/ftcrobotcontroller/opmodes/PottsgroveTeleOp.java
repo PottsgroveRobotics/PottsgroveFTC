@@ -26,12 +26,12 @@ public class PottsgroveTeleOp extends OpMode {
     static double shoulderSpeed = 1.0;
     static double elbowSpeed = 1.0;
     static double tapeExtrusionSpeed = 1.0;
-    static double tapeDirectionSpeed = 0.5;
+    static double tapeAngleSpeed = 0.5;
 
 
     // amount to change the arm servos' position.
     double handLeftPosition = 0.1;
-    double handRightPosition = 0.1;
+    double handRightPosition = 0.9;
 
     //declare motors and servos
     DcMotor motorDriveRight;
@@ -41,11 +41,9 @@ public class PottsgroveTeleOp extends OpMode {
     Servo motorClawLeft;
     Servo motorClawRight;
     DcMotor motorTapeAngle;
-    DcMotor motorTapeDistance;
+    DcMotor motorTapeExtrusion;
 
-    // position of the arm servos.
-    double shoulderPos = motorArmShoulder.getPosition();
-    double elbowPos = motorArmElbow.getPosition();
+
     /**
      * Constructor
      */
@@ -67,11 +65,18 @@ public class PottsgroveTeleOp extends OpMode {
         //motorDriveLeft.setDirection(DcMotor.Direction.REVERSE);
         motorTapeAngle = hardwareMap.dcMotor.get("motor_5");
         //motorTapeAngle.setDirection(DcMotor.Direction.REVERSE);
-        motorTapeDistance = hardwareMap.dcMotor.get("motor_6");
-        //motorTapeDistance.setDirection(DcMotor.Direction.REVERSE);
+        motorTapeExtrusion = hardwareMap.dcMotor.get("motor_6");
+        //motorTapeExtrusion.setDirection(DcMotor.Direction.REVERSE);
+        motorArmShoulder = hardwareMap.dcMotor.get("motor_3");
+        //motorArmShoulder.setDirection(DcMotor.Direction.REVERSE);
+        motorArmElbow = hardwareMap.dcMotor.get("servo_4");
+        //motorArmElbow.setDirection(DcMotor.Direction.REVERSE);
 
+<<<<<<< HEAD
         motorArmShoulder = hardwareMap.dcMotor.get("servo_1");
         motorArmElbow = hardwareMap.servo.get("servo_2");
+=======
+>>>>>>> origin/master
         motorClawLeft = hardwareMap.servo.get("servo_3");
         motorClawRight = hardwareMap.servo.get("servo_4");
 
