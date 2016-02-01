@@ -72,7 +72,7 @@ public class PottsgroveTeleOp extends OpMode {
         motorArmElbow = hardwareMap.dcMotor.get("servo_4");
         //motorArmElbow.setDirection(DcMotor.Direction.REVERSE);
 
-        
+
         motorClawLeft = hardwareMap.servo.get("servo_3");
         motorClawRight = hardwareMap.servo.get("servo_4");
 
@@ -108,7 +108,7 @@ public class PottsgroveTeleOp extends OpMode {
         driveRight = Range.clip(driveRight, -1, 1);
         driveLeft = Range.clip(driveLeft, -1, 1);
 
-
+        
         // write the values to the motors
         //motorDriveRight.setPower(driveRight);
         motorDriveRight.setPower(1.0);
